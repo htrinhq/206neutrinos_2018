@@ -5,7 +5,7 @@ from utilities import helper, error
 
 def display(data: [int], value: int) -> None:
     """Display the results expected."""
-    print('Number of values:',
+    print('\tNumber of values:',
             '\tStandard deviation',
             '\tArithmetic mean:',
             '\tRoot mean square:',
