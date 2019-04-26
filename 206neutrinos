@@ -3,6 +3,27 @@
 from sys import argv, stderr
 from utilities import helper, error
 
+def display(data: [int], value: int) -> None:
+    """Display the results expected."""
+    print('Number of values:',
+            '\tStandard deviation',
+            '\tArithmetic mean:',
+            '\tRoot mean square:',
+            '\tHarmonic mean:\n',
+            sep='\n')
+
+def neutrinos(data: [int]) -> None:
+    """Main loop for 206neutrinos."""
+    while(1):
+        value = input('Enter next value: ')
+        if value == "END":
+            break;
+        try:
+            value = int(value)
+        except ValueError:
+            error('Input must be an integer.')
+        display(data, value)
+
 if __name__ == "__main__":
     data = []
     if len(argv) == 2 and argv[1] == "-h":
@@ -15,3 +36,4 @@ if __name__ == "__main__":
                 data.append(int(argv[i]))
         except ValueError:
             error('Agruments must be integers.')
+        neutrinos(data)
