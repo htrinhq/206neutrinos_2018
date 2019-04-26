@@ -5,7 +5,7 @@ from utilities import helper, error
 
 def display(data: [int], value: int) -> None:
     """Display the results expected."""
-    print('\tNumber of values:',
+    print('\tNumber of values: {:d}' .format(data[0]),
             '\tStandard deviation',
             '\tArithmetic mean:',
             '\tRoot mean square:',
@@ -22,6 +22,7 @@ def neutrinos(data: [int]) -> None:
             value = int(value)
         except ValueError:
             error('Input must be an integer.')
+        data[0] = data[0] + 1
         display(data, value)
 
 if __name__ == "__main__":
