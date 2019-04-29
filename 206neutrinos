@@ -2,28 +2,45 @@
 
 from sys import argv, stderr
 from utilities import helper, error
+from math import sqrt
 
-def display(data: [int], value: int) -> None:
+def display(data: [float], value: float) -> [float]:
     """Display the results expected."""
-    print('\tNumber of values: {:d}' .format(data[0]),
-            '\tStandard deviation',
-            '\tArithmetic mean:',
-            '\tRoot mean square:',
-            '\tHarmonic mean:\n',
+    power = (pow(data[3], 2) + pow(data[1], 2)) * data[0]
+    data[0] += 1
+    data[1] = ((data[1] * (data[0] - 1)) + value) / data[0]
+    data[3] = sqrt(((power + pow(value, 2)) / data[0]) - pow(data[1], 2))
+    squared = sqrt((power + pow(value, 2)) / data[0])
+    data[2] = data[0] / ((1 / value) + ((data[0] - 1) / data[2]))
+    print('\tNumber of values:\t{:.00f}' .format(data[0]),
+            '\tStandard deviation:\t{:.02f}' .format(data[3]),
+            '\tArithmetic mean:\t{:.02f}' .format(data[1]),
+            '\tRoot mean square:\t{:.02f}' .format(squared),
+            '\tHarmonic mean:\t\t{:.02f}\n' .format(data[2]),
             sep='\n')
+    return data
 
-def neutrinos(data: [int]) -> None:
+def neutrinos(data: [float]) -> None:
     """Main loop for 206neutrinos."""
     while(1):
         value = input('Enter next value: ')
         if value == "END":
             break;
         try:
-            value = int(value)
+            value = float(value)
         except ValueError:
-            error('Input must be an integer.')
-        data[0] = data[0] + 1
-        display(data, value)
+            error('Input must be an float.')
+        if value < 0:
+            error('Input must be positive.')
+        data = display(data, value)
+
+def fill_data(data: [float]) -> [float]:
+    """Fill data tab."""
+    for i in range(1, 5):
+        data.append(float(argv[i]))
+        if float(argv[i]) < 0:
+            error('Arguments must be strictly positive.')
+    return data
 
 if __name__ == "__main__":
     data = []
@@ -33,8 +50,7 @@ if __name__ == "__main__":
         error('invalid arguments.')
     else:
         try:
-            for i in range(1, 5):
-                data.append(int(argv[i]))
+            data = fill_data(data)
         except ValueError:
             error('Agruments must be integers.')
         neutrinos(data)
