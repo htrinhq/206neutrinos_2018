@@ -1,3 +1,9 @@
+##
+## EPITECH PROJECT, 2018
+## 206neutrinos_2018
+## File description:
+## utilities.py
+
 from sys import stderr
 
 def helper() -> None:

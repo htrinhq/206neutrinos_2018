@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+##
+## EPITECH PROJECT, 2018
+## 206neutrinos_2018
+## File description:
+## 206neutrinos
+##
 
 from sys import argv, stderr
 from utilities import helper, error
